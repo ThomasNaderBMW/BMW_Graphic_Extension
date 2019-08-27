@@ -6,7 +6,7 @@ import "osi_common.proto";
 
 package osi3;
 
-//toDo: Messages aus common rausziehen. Defs inside? ZustandWohnen? model_ref AWD/FWD/RWD, VehicleClassification (LightState2Common), Windwiederstand, are_doors_closed,is_seat_belt_fastened
+//toDo: Was fehlt euch noch? Defs inside? ZustandWohnen? model_ref AWD/FWD/RWD, VehicleClassification (LightState2Common), Windwiederstand, are_doors_closed,is_seat_belt_fastened
 
 //
 // \brief Interface to the vehicle-model. So where the movement of a car is

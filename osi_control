@@ -1,0 +1,90 @@
+syntax = "proto2";
+
+option optimize_for = SPEED;
+
+import "osi_common.proto";
+
+package osi3;
+
+//
+// \brief This format is thought to control stand-alone parts of a simulation (e.g. a graphics-application).
+//
+// Definition of the state of a simulation-part.
+//
+// \note These conditions apply globally.
+//
+message SimulationControl
+{
+    // The data timestamp of the simulation environment. The zero time point is
+    // arbitrary but must be identical for all messages.
+    // Recommendation: Zero time point for start point of the simulation.
+    //
+    optional Timestamp timestamp = 1;
+	
+	MasterSlave?
+	HealthStatus?
+	FPS?
+
+    // The state of the application.
+    //
+    optional ApplicationState application_state = 2;
+
+    // Possibility to inform about an error.
+    //
+    // \note It is implementation-specific which information should be sent.
+    //
+    optional string error_code = 3;
+
+    // All active or inactive events.
+    //
+    repeated Event event = 4;
+
+    // Definition of possible application-states.
+    //
+    enum ApplicationState
+    {
+        // The application is alive.
+        //
+        STATE_ALIVE = 0;
+
+        // The application is initializing.
+        //
+        STATE_INITIALIZING = 1;
+
+        // The application is initialized.
+        //
+        STATE_INITIALIZED = 2;
+
+        // The application is starting.
+        //
+        STATE_STARTING = 3;
+
+        // The application is running.
+        //
+        STATE_RUNNING = 4;
+
+        // The application is paused.
+        //
+        STATE_PAUSED = 5;
+
+        // The application is stopped.
+        //
+        STATE_STOPPED = 6;
+    }
+}
+
+// 
+// \brief Possibility to trigger an event.
+//
+// \note It is implementation-specific which event is triggered.
+//
+message Event
+{
+    // The number/id of an event.
+    //
+    optional uint32 eventnumber = 1;
+
+    // The value (true=active, false=inactive) of an event.
+    //
+    optional bool is_active = 2;
+}

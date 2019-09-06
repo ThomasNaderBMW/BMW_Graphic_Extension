@@ -1,0 +1,87 @@
+syntax = "proto2";
+
+option optimize_for = SPEED;
+
+import "osi_common.proto";
+
+package osi3;
+
+//
+// \brief This format describes the graphic-configurationis made in the 
+// simulation-master. So stand-alone graphicengines can work because of
+// these information.
+//
+message Graphics
+{
+    // The data timestamp of the simulation environment. The zero time point is
+    // arbitrary but must be identical for all messages.
+    // Recommendation: Zero time point for start point of the simulation.
+    //
+    optional Timestamp timestamp = 1;
+
+    // Opaque reference of a map.
+    //
+    // \note Origin and orientation of the map have to coincide with the
+    // inertial coordinate frame of the ground truth.
+    //
+    // \note It is implementation-specific how map_reference is resolved.
+    //
+    optional string map_reference = 15
+    
+    // The ISO country code in 3 digit numeric format according to:
+    // ISO Code 3166/1 [1,2].
+    // E.g. Germany = 276, USA = 840.
+    //
+    // Unit: []
+    //
+    // \par References:
+    // - [1] [International Standard ISO 3166-1: Codes for the representation of
+    // names of countries and their subdivisions - Part 1: Country codes, third
+    // ed., 2013] (https://www.iso.org/obp/ui/)
+    // - [2] [Wikipedia ISO 3166/1] (https://en.wikipedia.org/wiki/ISO_3166-1)
+    //
+    optional uint32 country_code = 13
+
+    //
+    // Here is the main information about how the graphic-engine is configured.
+    // E.g.: Place of the camera, screen-configuration, avatar information, ...
+    //
+    repeated CameraConfiguration camera_configuration = 4;
+}
+
+// 
+// \brief Here is the main information about how the graphic-engine is configured.
+// E.g.: Place of the camera, screen-configuration, avatar information, ...
+//
+message CameraConfiguration
+{
+    // Some open points:
+    ScreenPositionX or Name?
+    ScreenPositionY
+    bFullScreen
+
+    //
+    // A cartesian 3D vector for the position, defined in osi_common.
+    // This is the position where the virtual camera is placed.
+    //
+    optional Vector3d position = 1;
+
+    //
+    // A 3D vector for the orientaion, defined in osi_common.
+    // This is the orientation of the virtual camera.
+    //
+    optional Orientation3d orientation = 2;
+
+    //
+    // Should the ego-vehicle been shown?
+    // Useful if the camera is inside the ego-vehicle.
+    //
+    optional bool showEgoVehicle = 3;
+
+    //
+    // Should the ego-avatar been shown?
+    // Useful for VR-Applications.
+    //
+    optional bool showEgoAvatar = 3;
+    --> Extra Message: Gender, SkinColor, ...
+}

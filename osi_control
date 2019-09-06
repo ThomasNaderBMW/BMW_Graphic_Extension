@@ -13,7 +13,7 @@ package osi3;
 //
 // \note These conditions apply globally.
 //
-message SimulationControl
+message Control
 {
     // The data timestamp of the simulation environment. The zero time point is
     // arbitrary but must be identical for all messages.

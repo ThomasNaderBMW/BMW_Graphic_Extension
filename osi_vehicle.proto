@@ -2,7 +2,9 @@ syntax = "proto2";
 
 option optimize_for = SPEED;
 
+import "osi_version.proto";
 import "osi_common.proto";
+import "osi_object.proto";
 
 package osi3;
 
@@ -32,42 +34,42 @@ message Vehicle
     //
     // The base parameters of the vehicle.
     //
-    optional VehicleBasics vehicle_basics = 1;
+    optional VehicleBasics vehicle_basics = 3;
     
     //
     // This is the interface, that describes how the vehicle is moving.
     // All coordinates and orientations are relative to the global ground truth
     // coordinate system.
     //
-    optional VehicleKinematics vehicle_kinematics = 3;
+    optional VehicleKinematics vehicle_kinematics = 4;
     
     //
     // Interface regarding the powertrain.
     //
-    optional VehiclePowertrain vehicle_powertrain = 4;
+    optional VehiclePowertrain vehicle_powertrain = 5;
     
     //
     // Interface regarding the SteeringWheel.
     // The focus here is on the steering wheel.
     //
-    optional VehicleSteeringWheel vehicle_steering_wheel = 5;
+    optional VehicleSteeringWheel vehicle_steering_wheel = 6;
     
     //
     // Interface regarding the wheels.
     // The focus here is on the physical description of a wheel.
     //
-    optional VehicleWheels vehicle_wheels = 6;
+    optional VehicleWheels vehicle_wheels = 7;
     
     //
     // Interface regarding the light.
     // The focus here is on the states of the lights.
     //
-    optional LightState vehicle_light_state = 7;
+    optional LightState vehicle_light_state = 8;
     
     //
     // aaaaa.
     //
-    repeated VehicleAutomatedDrivingFunction vehicle_automated_driving_function = 7;
+    repeated VehicleAutomatedDrivingFunction vehicle_automated_driving_function = 9;
 
     //
     // \brief The absolut base parameters of the vehicle.

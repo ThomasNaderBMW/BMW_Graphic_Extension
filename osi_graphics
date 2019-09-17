@@ -26,28 +26,104 @@ message Graphics
     //
     // \note It is implementation-specific how map_reference is resolved.
     //
-    optional string map_reference = 15
+    optional string map_reference = 2;
     
-    // The ISO country code in 3 digit numeric format according to:
-    // ISO Code 3166/1 [1,2].
-    // E.g. Germany = 276, USA = 840.
-    //
-    // Unit: []
-    //
-    // \par References:
-    // - [1] [International Standard ISO 3166-1: Codes for the representation of
-    // names of countries and their subdivisions - Part 1: Country codes, third
-    // ed., 2013] (https://www.iso.org/obp/ui/)
-    // - [2] [Wikipedia ISO 3166/1] (https://en.wikipedia.org/wiki/ISO_3166-1)
-    //
-    optional uint32 country_code = 13
-
     //
     // Here is the main information about how the graphic-engine is configured.
     // E.g.: Place of the camera, screen-configuration, avatar information, ...
     //
-    repeated CameraConfiguration camera_configuration = 4;
+    repeated ConfigurationScreen configuration_screen = 3;
+    
+    //
+    // ToDo: Description
+    //
+    repeated ConfigurationVirtualReality configuration_virtual_reality = 4;
+    
+    //
+    // ToDo: Description
+    //
+    repeated ConfigurationHMIComponents configuration_hmi_components = 5;
+    
+    Open:
+    Kommunal
+    Avatar (?ID, Visibility, Gender, SkinColor(Recherchieren), 
+    HideEgo, 
+    Camera
+    - CamView (DriverView, ..., AbsolutPosition (XYZ, RPY),  FarClipping, NearClipping, 
+    - Offset-Rotation, Position
+    SuperSamplingConfiguration (Prozentangabe 0-400 -> Bessere Renderqualität)
+    Puffer?
+    IsMotionCompensation
+    Kopfposition
+
+    IsVRU
+    Teleporting?
+
+    OSI-Env (Tageszeitentypen, Cloudspeed, Wettertypen, Cloudshadowintensity, Percipitation, TimeofDay)
+    country_code
 }
+
+// 
+// \brief ToDo: Description
+//
+message ConfigurationScreen
+{
+    // Some open points:
+    Fenster
+    - Position (X, Y)
+    - Size (PixelX, PixelY)
+
+
+    //
+    // ToDo: Description
+    //
+    optional Vector3d position = 1;
+}
+
+// 
+// \brief ToDo: Description
+//
+message ConfigurationVirtualReality
+{
+    // Some open points:
+    FOV (Diagonal, Grad), EnableHMDFrontCamera, 
+
+    //
+    // ToDo: Description
+    //
+    optional Vector3d position = 1;
+}
+
+// 
+// \brief ToDo: Description
+//
+message ConfigurationHMIComponents
+{
+    // Some open points:
+    // Kombi Config
+             bool DashBoardEnable;
+             FString DashBoardURL;
+             FVector2D DashBoardCanvas;
+             FVector2D DashBoardSize;
+             FVector2D DashBoardOffset;
+             FVector2D DashBoardScale;
+             FVector2D DashBoardCanvasLength;
+    // CID Config
+             bool LEDEnable;
+             FString LEDURL;
+             FVector2D LEDCanvas;
+             FVector2D LEDSize;
+             FVector2D LEDOffset;
+             FVector2D LEDScale;
+             FVector2D LEDLength;
+             
+             
+    //
+    // ToDo: Description
+    //
+    optional Vector3d position = 1;
+}
+
 
 // 
 // \brief Here is the main information about how the graphic-engine is configured.

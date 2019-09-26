@@ -64,7 +64,7 @@ message Vehicle
     // Interface regarding the light.
     // The focus here is on the states of the lights.
     //
-    optional LightState vehicle_light_state = 8;
+    optional MovingObject.VehicleClassification.LightState vehicle_light_state = 8;
     
     //
     // aaaaa.
@@ -421,7 +421,7 @@ message Vehicle
 
             // The light state of the vehicle.
             //
-            optional LightState light_state = 6;
+            optional MovingObject.VehicleClassification.LightState light_state = 6;
 
             // Request that the driver has to take over.
             //

@@ -53,11 +53,12 @@ message Control
     //
     enum ApplicationState
     {
-        // The application is alive.
+        // The application is created and alive.
         //
         STATE_ALIVE = 0;
 
         // The application is initializing.
+	// Transition: STATE_ALIVE ==> STATE_INITIALIZED
         //
         STATE_INITIALIZING = 1;
 
@@ -66,6 +67,7 @@ message Control
         STATE_INITIALIZED = 2;
 
         // The application is starting.
+	// Transition: STATE_INITIALIZED ==> STATE_RUNNING
         //
         STATE_STARTING = 3;
 
@@ -78,8 +80,20 @@ message Control
         STATE_PAUSED = 5;
 
         // The application is stopped.
+	// Transition: STATE_RUNNING ==> STATE_INITIALIZED
         //
         STATE_STOPPED = 6;
+	
+	// The application is resetting.
+	// Transition: STATE_INITIALIZED ==> STATE_ALIVE
+	// Transition: STATE_RUNNING ==> STATE_ALIVE
+	// Transition: STATE_FAILED ==> STATE_ALIVE
+        //
+        STATE_RESETTING = 7;
+	
+	// An Error occured in the application.
+        //
+        STATE_FAILURE = 8;
     }
 }
 

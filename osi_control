@@ -9,10 +9,6 @@ package osi3;
 //
 // \brief This format is thought to control stand-alone parts of a simulation (e.g. a graphics-application).
 //
-// Definition of the state of a simulation-part.
-//
-// \note These conditions apply globally.
-//
 message Control
 {
     // The data timestamp of the simulation environment. The zero time point is
@@ -21,34 +17,54 @@ message Control
     //
     optional Timestamp timestamp = 1;
 
+    // ID-Number of the sending application.
+    //
+    optional uint32 application_sender_id = 2;
+    
     // The application is the master (true). Otherwise the slave (false).
     //
-    optional bool is_master = 2;
+    optional bool is_master = 3;
     
     // The state of the application.
     //
-    optional ApplicationState application_state = 3;
+    optional ApplicationState application_state = 4;
     
     // The frames per second.
     //
-    optional uint32 fps = 4;
+    optional uint32 fps = 5;
     
     // The duration of the ping.
     //
     // Unit: [ms]
     //
-    optional uint32 ping = 5;
+    optional uint32 ping = 6;
 
     // Possibility to inform about an error, warning or just to give an information.
     //
     // \note It is implementation-specific which information should be sent.
     //
-    repeated Notification notification = 6;
+    repeated Notification notification = 7;
 
     // All active or inactive events.
     //
-    repeated Event event = 7;
+    repeated Event event = 8;
+    
+    // Possibility to send commands regarding the target state of a specific application.
+    // \note Not neccessary if the external application(s) just follow(s) the application_state of the master.
+    //
+    repeated ApplicationStateCommand application_state_command = 9;
+}
 
+// 
+// \brief Definition of possible application-states.
+// These are also used as command in the message ApplicationCommand.
+//
+message ApplicationState
+{
+    // The state of an application.
+    //
+    optional ApplicationState application_state = 1;
+    
     // Definition of possible application-states.
     //
     enum ApplicationState
@@ -98,21 +114,34 @@ message Control
 }
 
 // 
-// \brief Possibility to trigger an event.
+// \brief Definition of possible commands regarding the target state of another specific application.
 //
-// \note It is implementation-specific which event is triggered.
+message ApplicationStateCommand
+{
+    // ID-Number of the receiver-application.
+    //
+    optional uint32 application_receiver_id = 1;
+    
+    // This is the target state the receiver-application should have or change to.
+    //
+    optional ApplicationState application_state_command = 2;
+}
+
+// 
+// \brief Possibility to send a notification.
+// Can be used to send e.g. error-messages.
 //
 message Notification
 {
-    // The number/id of an event.
+    // The content of the notification.
     //
     optional string notification = 1;
 
-    // The value (true=active, false=inactive) of an event.
+    // Defines the type of the notification.
     //
     optional NotificationType notification_type = 2;
     
-    // Definition of possible application-states.
+    // Definition of possible notification-types.
     //
     enum NotificationType
     {
@@ -127,6 +156,10 @@ message Notification
 	// The notificiation is just an information.
         //
         TYPE_INFORMATION = 2;
+	
+	// The notificiation is used for debugging.
+        //
+        TYPE_DEBUG = 3;
     }
 }
 

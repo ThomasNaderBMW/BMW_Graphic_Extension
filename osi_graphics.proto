@@ -72,7 +72,11 @@ message ConfigurationScreen
     Fenster
     - Position (X, Y)
     - Size (PixelX, PixelY)
-
+    
+    Camera
+    - CamView (DriverView, ..., AbsolutPosition (XYZ, RPY),  FarClipping, NearClipping, Frustum) 
+    - Offset-Rotation, Position
+    //Eine Fixierungspunkt pro Kamera auf entweder relativ oder absolut
 
     //
     // ToDo: Description

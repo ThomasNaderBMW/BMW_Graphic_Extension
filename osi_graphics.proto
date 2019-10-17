@@ -29,20 +29,42 @@ message Graphics
     optional string map_reference = 2;
     
     //
-    // Here is the main information about how the graphic-engine is configured.
+    // Information which mode is used for the graphic-engine configuration.
+    //
+    optional ConfigurationMode configuration_mode = 3;
+    
+    //
+    // Here is the main information about how a screen is configured.
     // E.g.: Place of the camera, screen-configuration, avatar information, ...
     //
-    repeated ConfigurationScreen configuration_screen = 3;
+    repeated ConfigurationScreen configuration_screen = 4;
     
     //
     // ToDo: Description
     //
-    repeated ConfigurationVirtualReality configuration_virtual_reality = 4;
+    repeated ConfigurationVirtualReality configuration_virtual_reality = 5;
     
     //
     // ToDo: Description
     //
-    repeated ConfigurationHMIComponents configuration_hmi_components = 5;
+    repeated ConfigurationHMIComponents configuration_hmi_components = 6;
+    
+    // Definition of all possible modes for the graphic-engine configuration.
+    //
+    enum ConfigurationMode
+    {
+        // The configuration of the graphic-engine is single-screen.
+        //
+        CONFIGURATION_SCREEN_SINGLE = 0;
+
+        // The configuration of the graphic-engine is multi-screen.
+        //
+        CONFIGURATION_SCREEN_MULTI = 1;
+        
+        // The configuration of the graphic-engine is for virtual reality.
+        //
+        CONFIGURATION_VR = 2;
+    }
     
     Open:
     Kommunal

@@ -8,13 +8,13 @@ import "osi_object.proto";
 
 package osi3;
 
-//toDo: Was fehlt euch noch? Defs inside? ZustandWohnen? model_ref AWD/FWD/RWD, VehicleClassification (LightState2Common), Windwiederstand, are_doors_closed,is_seat_belt_fastened
-
 //
-// \brief Interface to the vehicle-model. So where the movement of a car is
-// calculated, but also the behaviour of some components of the car itself.
-// Consists of four messages: VehicleKinematics, VehiclePowertrain,
-// VehicleSteeringWheel and VehicleWheels.
+// \brief The vehicle-message is a deeper description of a vehicle.
+// Consists of different messages categorizing the vehicle in:
+// Vehicle-Basics, Vehicle-Kinematics, Vehicle-Powertrain, Vehicle-SteeringWheel, Vehicle-Wheels,
+// Vehicle-Light-State, Vehicle-Automated-Driving-Functions.
+// As it is an description of the whole vehicle (focus on cars) it can be used as interface for various reasons, 
+// e.g. to the vehicle-model for kinematics calculation or even for the visualisation in a graphic-engine.
 //
 message Vehicle
 {
@@ -67,7 +67,8 @@ message Vehicle
     optional MovingObject.VehicleClassification.LightState vehicle_light_state = 8;
     
     //
-    // aaaaa.
+    // Interface regarding automated-driving functions.
+    // The focus here is on states and intentions of a function.
     //
     repeated VehicleAutomatedDrivingFunction vehicle_automated_driving_function = 9;
 
@@ -84,20 +85,21 @@ message Vehicle
         //
         optional string manufacturer = 2;
 	
-	// The modelname of the car. 
+        // The modelname of the car. 
         //
         optional string modelname = 3;
 	
-	// The reference_string to the car (e.g. CAD-Modell). 
+        // The reference_string to the car (e.g. CAD-Modell). 
         //
         optional string reference_string = 4;
 	
-	// The weight of the car. 
+        // The weight of the car. 
         //
         optional double weight = 5;
-	
-        //ToDo: What else?
-        // luftwiderstand?
+		
+		// The license plate of the car. 
+        //
+        optional string license_plate = 6;
     }
 
     //
@@ -178,9 +180,26 @@ message Vehicle
         //
         optional double handbrake_position = 9;
 
-        // The all-wheel drive (AWD) mode is engaged on the powertrain.
+		// Description how the powertrain is providing power to the wheels.
         //
-        optional bool is_all_wheel_drive_engaged = 10;
+        enum PowertrainMode powertrain_mode = 10;
+
+        // Definition how the powertrain is providing power to the wheels.
+        //
+        enum PowertrainMode
+        {
+            // All-wheel drive (AWD).
+            //
+            POWERTRAIN_MODE_ALL_WHEEL_DRIVE = 0;
+
+            // Front-wheel drive (FWD).
+            //
+            POWERTRAIN_MODE_FRONT_WHEEL_DRIVE = 1;
+
+            // Rear-wheel drive (RWD).
+            //
+            POWERTRAIN_MODE_REAR_WHEEL_DRIVE = 2;
+        }
     }
 
     //
@@ -449,10 +468,9 @@ message Vehicle
                 //
                 LANE_CHANGE_REQUEST_LC_RIGHT = 2;
             }
-	}
+        }
     }
 }
-
 
 
 //

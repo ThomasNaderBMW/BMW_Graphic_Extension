@@ -63,11 +63,11 @@ message ApplicationState
 {
     // The state of an application.
     //
-    optional ApplicationState application_state = 1;
+    optional ApplicationStateDefinition application_state = 1;
     
     // Definition of possible application-states.
     //
-    enum ApplicationState
+    enum ApplicationStateDefinition
     {
         // The application is created and alive.
         //

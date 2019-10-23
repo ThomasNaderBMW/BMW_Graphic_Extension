@@ -143,23 +143,17 @@ message Vehicle
         //
         // Unit: [l]
         //
-        optional double engine_consumption = 4;
-
-        // Consumption in liters per 100 km.
-        //
-        // Unit: [l]
-        //
-        optional double fuel_consumption = 5;
+        optional double fuel_consumption = 4;
 
         // Consumption of electrical or hybrid vehicle per 100 km
         //
         // Unit: [kWh]
         //
-        optional double electrical_energy_consumption = 6;
+        optional double electrical_energy_consumption = 5;
 
         // The actual gear of the gear lever.
         //
-        optional GearLeverState gear_lever_state = 7;
+        optional GearLeverState gear_lever_state = 6;
         
         // The actual gear of the transmission.
         // E.g. gear_lever can be in "D" and transmission in "4", but not the
@@ -171,18 +165,18 @@ message Vehicle
         // - negative: reverse mode (generally -1, but few vehicles have several
         //   reverse mode gears)
         //
-        optional int32 gear_transmission = 8;
+        optional int32 gear_transmission = 7;
 
         // Position of the handbrake.
         // A value of 0% means fully released and 100% means fully pressed
         //
         // Unit: [%]
         //
-        optional double handbrake_position = 9;
+        optional double handbrake_position = 8;
 
-		// Description how the powertrain is providing power to the wheels.
+        // Description how the powertrain is providing power to the wheels.
         //
-        enum PowertrainMode powertrain_mode = 10;
+        enum PowertrainMode powertrain_mode = 9;
 
         // Definition how the powertrain is providing power to the wheels.
         //
@@ -342,23 +336,18 @@ message Vehicle
         optional double slipangle = 11;
     }
 
-    // 
-    // \brief Needed?
-    //
-    message DriverActions
-    {
-        
-    }
-
     //
     // \brief Information about the automated driving system.
-    // The focus here is on states of the function.
+    // Important is the differentiation between states and intentions.
+    // An automated-driving function itself does not have many states. It is more about Intentions,
+    // to change some vehicle states. E.g. a desired acceleration(-pedal-position), but effective is the one in
+    // the powertrain message.
     //
     message VehicleAutomatedDrivingFunction
     {
         //
         // Here the name of the function can be chosen.
-        // E.g.: hadpilot, longitudinal_control, lateral_control or emergency_brake_assistant.
+        // E.g.: Hadpilot, longitudinal_control, lateral_control or emergency_brake_assistant.
         //
         optional string function_name = 1;
 		
@@ -373,7 +362,7 @@ message Vehicle
         optional Intentions intentions = 3;
 
         //
-        // \brief Internal states of driver assistance functions.  
+        // \brief Internal states of an automated-driving function.  
         //    
         //
         message States
@@ -398,7 +387,7 @@ message Vehicle
         }
 
         //
-        // \brief An Interface to describe the communication of an AD-function.
+        // \brief Interface to describe the communication of an automated-driving function.
         //
         // Intentions, requests or wishes from the function to change the vehicle-state.
         //

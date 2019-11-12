@@ -96,18 +96,18 @@ message ApplicationState
         STATE_PAUSED = 5;
 
         // The application is stopped.
-	// Transition: STATE_RUNNING ==> STATE_INITIALIZED
+        // Transition: STATE_RUNNING ==> STATE_INITIALIZED
         //
         STATE_STOPPED = 6;
-	
-	// The application is resetting.
-	// Transition: STATE_INITIALIZED ==> STATE_ALIVE
-	// Transition: STATE_RUNNING ==> STATE_ALIVE
-	// Transition: STATE_FAILED ==> STATE_ALIVE
+
+        // The application is resetting.
+        // Transition: STATE_INITIALIZED ==> STATE_ALIVE
+        // Transition: STATE_RUNNING ==> STATE_ALIVE
+        // Transition: STATE_FAILED ==> STATE_ALIVE
         //
         STATE_RESETTING = 7;
-	
-	// An Error occured in the application.
+
+        // An Error occured in the application.
         //
         STATE_FAILURE = 8;
     }

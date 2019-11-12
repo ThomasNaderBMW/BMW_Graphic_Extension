@@ -74,7 +74,7 @@ message ApplicationState
         STATE_ALIVE = 0;
 
         // The application is initializing.
-	// Transition: STATE_ALIVE ==> STATE_INITIALIZED
+        // Transition: STATE_ALIVE ==> STATE_INITIALIZED
         //
         STATE_INITIALIZING = 1;
 
@@ -83,7 +83,7 @@ message ApplicationState
         STATE_INITIALIZED = 2;
 
         // The application is starting.
-	// Transition: STATE_INITIALIZED ==> STATE_RUNNING
+        // Transition: STATE_INITIALIZED ==> STATE_RUNNING
         //
         STATE_STARTING = 3;
 
@@ -148,16 +148,16 @@ message Notification
         // An error occurred.
         //
         TYPE_ERROR = 0;
-	
-	// The notificiation is a warning.
+
+        // The notificiation is a warning.
         //
         TYPE_WARNING = 1;
-	
-	// The notificiation is just an information.
+
+        // The notificiation is just an information.
         //
         TYPE_INFORMATION = 2;
-	
-	// The notificiation is used for debugging.
+
+        // The notificiation is used for debugging.
         //
         TYPE_DEBUG = 3;
     }

@@ -67,12 +67,8 @@ message Graphics
     }
     
     Open:
-    Kommunal
     Avatar (?ID, Visibility, Gender, SkinColor(Recherchieren), 
     HideEgo, 
-    Camera
-    - CamView (DriverView, ..., AbsolutPosition (XYZ, RPY),  FarClipping, NearClipping, 
-    - Offset-Rotation, Position
     SuperSamplingConfiguration (Prozentangabe 0-400 -> Bessere Renderqualität)
     Puffer?
     IsMotionCompensation

@@ -37,12 +37,12 @@ message Graphics
     // Here is the main information about how a screen is configured.
     // E.g.: Place of the camera, screen-configuration, avatar information, ...
     //
-    repeated ConfigurationScreen configuration_screen = 4;
+    optional ConfigurationScreen configuration_screen = 4;
     
     //
     // ToDo: Description
     //
-    repeated ConfigurationVirtualReality configuration_virtual_reality = 5;
+    optional ConfigurationVirtualReality configuration_virtual_reality = 5;
     
     //
     // ToDo: Description
@@ -89,21 +89,169 @@ message Graphics
 // \brief ToDo: Description
 //
 message ConfigurationScreen
-{
-    // Some open points:
-    Fenster
-    - Position (X, Y)
-    - Size (PixelX, PixelY)
+{    
+    //
+    // \brief ToDo: Description
+    //
+    repeated GraphicEngineConfiguration graphic_engine_configuration = 1;
     
-    Camera
-    - CamView (DriverView, ..., AbsolutPosition (XYZ, RPY),  FarClipping, NearClipping, Frustum) 
-    - Offset-Rotation, Position
-    //Eine Fixierungspunkt pro Kamera auf entweder relativ oder absolut
+    //
+    // \brief ToDo: Description
+    //
+    repeated DisplayConfiguration display_configuration = 2;
+    
+    //
+    // \brief ToDo: Description
+    //
+    repeated WindowConfiguration window_configuration = 3;
+    
+    //
+    // \brief ToDo: Description
+    //
+    repeated ViewportConfiguration viewport_configuration = 4;
+    
+    // 
+    // \brief ToDo: Description
+    //
+    message GraphicEngineConfiguration
+    {       
+        //
+        // ID of the graphic engine.
+        //
+        optional int graphic_engine_id = 1;
+    }
 
+    // 
+    // \brief ToDo: Description
     //
-    // ToDo: Description
+    message DisplayConfiguration
+    {
+        //
+        // Defines on which display the window is placed.
+        //
+        optional int used_by_graphic_engine_id = 1;
+        
+        //
+        // ID of the display.
+        //
+        optional int display_id = 2;
+    }
+
+    // 
+    // \brief ToDo: Description
     //
-    optional Vector3d position = 1;
+    message WindowConfiguration
+    {
+        //
+        // Defines on which display the window is placed.
+        //
+        optional int placement_on_display_id = 1;
+        
+        //
+        // ID of the window.
+        //
+        optional int window_id = 2;
+        
+        //
+        // Position x of the window inside a display.
+        //
+        optional double position_x = 3;
+
+        //
+        // Position y of the window inside a display.
+        //
+        optional double position_y = 4;
+
+        //
+        // Pixel-width in x of the window inside a display.
+        //
+        optional double size_x = 5;
+
+        //
+        // Pixel-height in y of the window inside a display.
+        //
+        optional double size_y = 6;
+    }
+    
+    // 
+    // \brief ToDo: Description
+    //
+    message ViewportConfiguration
+    {
+        //
+        // Defines on which window the viewport is placed.
+        //
+        optional int placement_on_window_id = 1;
+        
+        //
+        // ID of the viewport.
+        //
+        optional int viewport_id = 2;
+        
+        //
+        // Position x of the viewport inside a window.
+        //
+        optional double position_x = 3;
+
+        //
+        // Position y of the viewport inside a window.
+        //
+        optional double position_y = 4;
+
+        //
+        // Pixel-width in x of the viewport inside a window.
+        //
+        optional double size_x = 5;
+
+        //
+        // Pixel-height in y of the viewport inside a window.
+        //
+        optional double size_y = 6;
+        
+        //
+        // ToDo: Description
+        //
+        optional CameraConfiguration camera_configuration = 7;
+    }
+    
+    // 
+    // \brief Here is the main information about how the graphic-engine is configured.
+    // E.g.: Place of the camera, screen-configuration, avatar information, ...
+    //
+    message CameraConfiguration
+    {
+        // Some open points:
+        bFullScreen
+        Camera
+        - CamView (DriverView, ..., AbsolutPosition (XYZ, RPY),  FarClipping, NearClipping, Frustum) 
+        - Offset-Rotation, Position
+        //Eine Fixierungspunkt pro Kamera auf entweder relativ oder absolut
+
+        //
+        // A cartesian 3D vector for the position, defined in osi_common.
+        // This is the position where the virtual camera is placed.
+        //
+        optional Vector3d position = 1;
+
+        //
+        // A 3D vector for the orientaion, defined in osi_common.
+        // This is the orientation of the virtual camera.
+        //
+        optional Orientation3d orientation = 2;
+
+        //
+        // Should the ego-vehicle been shown?
+        // Useful if the camera is inside the ego-vehicle.
+        //
+        optional bool showEgoVehicle = 3;
+
+        //
+        // Should the ego-avatar been shown?
+        // Useful for VR-Applications.
+        //
+        optional bool showEgoAvatar = 3;
+        --> Extra Message: Gender, SkinColor, ...
+    }
 }
 
 // 
@@ -148,42 +296,4 @@ message ConfigurationHMIComponents
     // ToDo: Description
     //
     optional Vector3d position = 1;
-}
-
-
-// 
-// \brief Here is the main information about how the graphic-engine is configured.
-// E.g.: Place of the camera, screen-configuration, avatar information, ...
-//
-message CameraConfiguration
-{
-    // Some open points:
-    ScreenPositionX or Name?
-    ScreenPositionY
-    bFullScreen
-
-    //
-    // A cartesian 3D vector for the position, defined in osi_common.
-    // This is the position where the virtual camera is placed.
-    //
-    optional Vector3d position = 1;
-
-    //
-    // A 3D vector for the orientaion, defined in osi_common.
-    // This is the orientation of the virtual camera.
-    //
-    optional Orientation3d orientation = 2;
-
-    //
-    // Should the ego-vehicle been shown?
-    // Useful if the camera is inside the ego-vehicle.
-    //
-    optional bool showEgoVehicle = 3;
-
-    //
-    // Should the ego-avatar been shown?
-    // Useful for VR-Applications.
-    //
-    optional bool showEgoAvatar = 3;
-    --> Extra Message: Gender, SkinColor, ...
 }

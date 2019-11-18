@@ -13,11 +13,16 @@ package osi3;
 //
 message Graphics
 {
+    //
+    // The interface version used by the sender.
+    //
+    optional InterfaceVersion version = 1;
+    
     // The data timestamp of the simulation environment. The zero time point is
     // arbitrary but must be identical for all messages.
     // Recommendation: Zero time point for start point of the simulation.
     //
-    optional Timestamp timestamp = 1;
+    optional Timestamp timestamp = 2;
 
     // Opaque reference of a map.
     //
@@ -26,45 +31,24 @@ message Graphics
     //
     // \note It is implementation-specific how map_reference is resolved.
     //
-    optional string map_reference = 2;
-    
-    //
-    // Information which mode is used for the graphic-engine configuration.
-    //
-    optional ConfigurationMode configuration_mode = 3;
+    optional string map_reference = 3;
     
     //
     // Here is the main information about how a screen is configured.
     // E.g.: Place of the camera, screen-configuration, avatar information, ...
     //
-    optional ConfigurationScreen configuration_screen = 4;
+    optional ConfigurationScreen configuration_screen = 5;
     
     //
     // ToDo: Description
     //
-    optional ConfigurationVirtualReality configuration_virtual_reality = 5;
+    optional ConfigurationVirtualReality configuration_virtual_reality = 6;
     
     //
     // ToDo: Description
     //
-    repeated ConfigurationHMIComponents configuration_hmi_components = 6;
-    
-    // Definition of all possible modes for the graphic-engine configuration.
-    //
-    enum ConfigurationMode
-    {
-        // The configuration of the graphic-engine is single-screen.
-        //
-        CONFIGURATION_SCREEN_SINGLE = 0;
+    repeated ConfigurationHMIComponents configuration_hmi_components = 7;
 
-        // The configuration of the graphic-engine is multi-screen.
-        //
-        CONFIGURATION_SCREEN_MULTI = 1;
-        
-        // The configuration of the graphic-engine is for virtual reality.
-        //
-        CONFIGURATION_VR = 2;
-    }
     
     Open:
     Avatar (?ID, Visibility, Gender, SkinColor(Recherchieren), 
@@ -245,7 +229,7 @@ message ConfigurationScreen
         // Should the ego-avatar been shown?
         // Useful for VR-Applications.
         //
-        optional bool showEgoAvatar = 3;
+        optional bool showEgoAvatar = 4;
         --> Extra Message: Gender, SkinColor, ...
     }
 }

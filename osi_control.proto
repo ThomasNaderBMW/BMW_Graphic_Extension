@@ -11,48 +11,53 @@ package osi3;
 //
 message Control
 {
+    //
+    // The interface version used by the sender.
+    //
+    optional InterfaceVersion version = 1;
+    
     // The data timestamp of the simulation environment. The zero time point is
     // arbitrary but must be identical for all messages.
     // Recommendation: Zero time point for start point of the simulation.
     //
-    optional Timestamp timestamp = 1;
+    optional Timestamp timestamp = 2;
 
     // ID-Number of the sending application.
     //
-    optional uint32 application_sender_id = 2;
+    optional uint32 application_sender_id = 3;
     
     // The application is the master (true). Otherwise the slave (false).
     //
-    optional bool is_master = 3;
+    optional bool is_master = 4;
     
     // The state of the application.
     //
-    optional ApplicationStateDefinition application_state = 4;
+    optional ApplicationStateDefinition application_state = 5;
     
     // The frames per second.
     //
-    optional double fps = 5;
+    optional double fps = 6;
     
     // The duration of the ping.
     //
     // Unit: [ms]
     //
-    optional double ping = 6;
+    optional double ping = 7;
 
     // Possibility to inform about an error, warning or just to give an information.
     //
     // \note It is implementation-specific which information should be sent.
     //
-    repeated Notification notification = 7;
+    repeated Notification notification = 8;
 
     // All active or inactive events.
     //
-    repeated Event event = 8;
+    repeated Event event = 9;
     
     // Possibility to send commands regarding the target state of a specific application.
     // \note Not neccessary if the external application(s) just follow(s) the application_state of the master.
     //
-    repeated ApplicationStateCommand application_state_command = 9;
+    repeated ApplicationStateCommand application_state_command = 10;
 }
 
 // 

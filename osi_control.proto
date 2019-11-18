@@ -27,17 +27,17 @@ message Control
     
     // The state of the application.
     //
-    optional ApplicationState application_state = 4;
+    optional ApplicationStateDefinition application_state = 4;
     
     // The frames per second.
     //
-    optional uint32 fps = 5;
+    optional double fps = 5;
     
     // The duration of the ping.
     //
     // Unit: [ms]
     //
-    optional uint32 ping = 6;
+    optional double ping = 6;
 
     // Possibility to inform about an error, warning or just to give an information.
     //
@@ -57,64 +57,72 @@ message Control
 
 // 
 // \brief Definition of possible application-states.
-// These are also used as command in the message ApplicationCommand.
+// These are also used as commands in the message ApplicationStateCommand.
 //
-message ApplicationState
+message ApplicationStateDefinition
 {
     // The state of an application.
     //
-    optional ApplicationStateDefinition application_state = 1;
+    optional ApplicationState application_state = 1;
     
     // Definition of possible application-states.
     //
-    enum ApplicationStateDefinition
+    enum ApplicationState
     {
         // The application is created and alive.
         //
-        STATE_ALIVE = 0;
+        APPLICATION_STATE_UNKNOWN = 0;
+        
+        // The application is created and alive.
+        //
+        APPLICATION_STATE_OTHER = 1;
+        
+        // The application is created and alive.
+        //
+        APPLICATION_STATE_ALIVE = 2;
 
         // The application is initializing.
         // Transition: STATE_ALIVE ==> STATE_INITIALIZED
         //
-        STATE_INITIALIZING = 1;
+        APPLICATION_STATE_INITIALIZING = 3;
 
         // The application is initialized.
         //
-        STATE_INITIALIZED = 2;
+        APPLICATION_STATE_INITIALIZED = 4;
 
         // The application is starting.
         // Transition: STATE_INITIALIZED ==> STATE_RUNNING
         //
-        STATE_STARTING = 3;
+        APPLICATION_STATE_STARTING = 5;
 
         // The application is running.
         //
-        STATE_RUNNING = 4;
+        APPLICATION_STATE_RUNNING = 6;
 
         // The application is paused.
         //
-        STATE_PAUSED = 5;
+        APPLICATION_STATE_PAUSED = 7;
 
         // The application is stopped.
         // Transition: STATE_RUNNING ==> STATE_INITIALIZED
         //
-        STATE_STOPPED = 6;
+        APPLICATION_STATE_STOPPED = 8;
 
         // The application is resetting.
         // Transition: STATE_INITIALIZED ==> STATE_ALIVE
         // Transition: STATE_RUNNING ==> STATE_ALIVE
         // Transition: STATE_FAILED ==> STATE_ALIVE
         //
-        STATE_RESETTING = 7;
+        APPLICATION_STATE_RESETTING = 9;
 
         // An Error occured in the application.
         //
-        STATE_FAILURE = 8;
+        APPLICATION_STATE_FAILURE = 10;
     }
 }
 
 // 
-// \brief Definition of possible commands regarding the target state of another specific application.
+// \brief Definition of possible commands regarding the target state another application should have.
 //
 message ApplicationStateCommand
 {
@@ -124,7 +132,7 @@ message ApplicationStateCommand
     
     // This is the target state the receiver-application should have or change to.
     //
-    optional ApplicationState application_state_command = 2;
+    optional ApplicationStateDefinition application_state_command = 2;
 }
 
 // 
@@ -145,21 +153,29 @@ message Notification
     //
     enum NotificationType
     {
+        // The type is unknown.
+        //
+        NOTIFICATION_TYPE_UNKNOWN = 0;
+        
+        // It is another type.
+        //
+        NOTIFICATION_TYPE_OTHER = 1;
+        
         // An error occurred.
         //
-        NOTIFICATION_TYPE_ERROR = 0;
+        NOTIFICATION_TYPE_ERROR = 2;
 
         // The notificiation is a warning.
         //
-        NOTIFICATION_TYPE_WARNING = 1;
+        NOTIFICATION_TYPE_WARNING = 3;
 
         // The notificiation is just an information.
         //
-        NOTIFICATION_TYPE_INFORMATION = 2;
+        NOTIFICATION_TYPE_INFORMATION = 4;
 
         // The notificiation is used for debugging.
         //
-        NOTIFICATION_TYPE_DEBUG = 3;
+        NOTIFICATION_TYPE_DEBUG = 5;
     }
 }
 

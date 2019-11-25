@@ -51,15 +51,10 @@ message Graphics
 
     
     Open:
-    Avatar (?ID, Visibility, Gender, SkinColor(Recherchieren), 
-    HideEgo, 
-    
     Puffer?
     IsMotionCompensation
     Kopfposition
 
-    IsVRU
-    Teleporting?
 
     OSI-Env (Tageszeitentypen, Cloudspeed, Wettertypen, Cloudshadowintensity, Percipitation, TimeofDay)
     country_code
@@ -200,7 +195,7 @@ message ConfigurationScreen
         //
         // ToDo: Description.
         //
-        optional CameraConfiguration camera_configuration = 7;
+        optional CameraConfiguration camera_configuration = 8;
     }
     
     // 
@@ -212,7 +207,7 @@ message ConfigurationScreen
         // Some open points:
         bFullScreen
         Camera
-        - CamView (DriverView, ..., AbsolutPosition (XYZ, RPY),  FarClipping, NearClipping, Frustum) 
+        - CamView (DriverView, ..., ) 
         - Offset-Rotation, Position
         //Eine Fixierungspunkt pro Kamera auf entweder relativ oder absolut
 
@@ -239,19 +234,38 @@ message ConfigurationScreen
         // Unit: [rad/s]
         //
         optional Orientation3d orientation_rate = 3;
+        
+        //
+        // ToDo: Description.
+        //
+        optional double FarClipping = 4;
+        
+        //
+        // ToDo: Description.
+        //
+        optional double NearClipping = 5;
+        
+        //
+        // ToDo: Description.
+        //
+        optional double Frustum = 6;
 
         //
         // Should the ego-vehicle been shown?
         // Useful if the camera is inside the ego-vehicle.
         //
-        optional bool showEgoVehicle = 4;
+        optional bool showEgoVehicle = 7;
 
         //
         // Should the ego-avatar been shown?
         // Useful for VR-Applications.
         //
-        optional bool showEgoAvatar = 5;
-        --> Extra Message: Gender, SkinColor, ...
+        optional bool showEgoAvatar = 8;
+        
+        //
+        // ToDo: Description.
+        //
+        optional Avatar avatar = 4;
     }
 }
 
@@ -278,6 +292,10 @@ message ConfigurationVirtualReality
     // ToDo: Description
     //
     optional bool hmd_front_camera_enabled = 3;
+    
+    
+    IsVRU
+    Teleporting?
 }
 
 // 
@@ -308,4 +326,38 @@ message ConfigurationHMIComponents
     // ToDo: Description
     //
     optional Vector3d position = 1;
+}
+
+// 
+// \brief ToDo: Description
+//
+message Avatar
+{             
+    //
+    // ToDo: Description
+    //
+    optional Gender gender = 1;
+    
+    --> Extra Message: SkinColor, ID, Visibility, Gender,
+    
+    //
+    //
+    enum Gender
+    {
+        // The gender is unknown.
+        //
+        GENDER_UNKNOWN = 0;
+
+        // It is another gender.
+        //
+        GENDER_OTHER = 1;
+
+        // The gender is female.
+        //
+        GENDER_FEMALE = 2;
+        
+        // The gender is male.
+        //
+        GENDER_MALE = 3;
+    }
 }

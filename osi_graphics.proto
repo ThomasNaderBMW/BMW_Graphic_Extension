@@ -195,25 +195,35 @@ message ConfigurationScreen
         //
         // ToDo: Description.
         //
-        optional CameraConfiguration camera_configuration = 8;
+        optional ViewConfiguration view_configuration = 8;
     }
     
     // 
-    // \brief Here is the main information about how the graphic-engine is configured.
-    // E.g.: Place of the camera, screen-configuration, avatar information, ...
+    // \brief Here is the main information how the view of the camera/watcher is configured.
     //
-    message CameraConfiguration
+    message ViewConfiguration
     {
         // Some open points:
         bFullScreen
-        Camera
-        - CamView (DriverView, ..., ) 
-        - Offset-Rotation, Position
-        //Eine Fixierungspunkt pro Kamera auf entweder relativ oder absolut
+        
+        //
+        // If this value is false the position is absolute, so the view is fixed to the
+        // point defined by the following parameters (position, orientation, ...).
+        // If true the view is relative to a specific object, assigned to the id specified
+        // by the second parameter. The position-parameter determines therefore the distance/offset
+        // relative to the object.
+        //
+        optional bool is_position_relative = 1;
+        
+        //
+        // If the position is relative, this parameter defines the distance/offset to which object
+        // by id. The position of the object can be found in osi_vehicle or osi_groundtruth.
+        //
+        optional int relative_to_id = 2;
 
         //
         // A cartesian 3D vector for the position, defined in osi_common.
-        // This is the position where the virtual camera is placed.
+        // This is the position where the view is placed absolute/relative.
         //
         // Unit: [m]
         //
@@ -221,7 +231,7 @@ message ConfigurationScreen
 
         //
         // A 3D vector for the orientaion, defined in osi_common.
-        // This is the orientation of the virtual camera.
+        // This is the orientation of the view.
         //
         // Unit: [rad]
         //
@@ -229,7 +239,7 @@ message ConfigurationScreen
         
         //
         // A 3D vector for the orientaion, defined in osi_common.
-        // This is the orientation-rate of the virtual camera.
+        // This is the orientation-rate of the view.
         //
         // Unit: [rad/s]
         //

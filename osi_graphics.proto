@@ -238,34 +238,28 @@ message ConfigurationScreen
         //
         // ToDo: Description.
         //
-        optional double FarClipping = 4;
+        optional double clipping_far = 4;
         
         //
         // ToDo: Description.
         //
-        optional double NearClipping = 5;
+        optional double clipping_near = 5;
         
         //
         // ToDo: Description.
         //
-        optional double Frustum = 6;
+        optional double frustum = 6;
 
         //
         // Should the ego-vehicle been shown?
         // Useful if the camera is inside the ego-vehicle.
         //
-        optional bool showEgoVehicle = 7;
-
-        //
-        // Should the ego-avatar been shown?
-        // Useful for VR-Applications.
-        //
-        optional bool showEgoAvatar = 8;
+        optional bool show_host_vehicle = 7;
         
         //
         // ToDo: Description.
         //
-        optional Avatar avatar = 4;
+        optional Avatar avatar = 8;
     }
 }
 
@@ -293,9 +287,15 @@ message ConfigurationVirtualReality
     //
     optional bool hmd_front_camera_enabled = 3;
     
+    //
+    // Is it a vulnerable road user (e.g. pedestrian)?
+    //
+    optional bool is_vulnerable_road_user = 4;
     
-    IsVRU
-    Teleporting?
+    //
+    // Is teleporting available?
+    //
+    optional bool is_teleporting_available = 4;
 }
 
 // 
@@ -329,18 +329,22 @@ message ConfigurationHMIComponents
 }
 
 // 
-// \brief ToDo: Description
+// \brief ToDo: Description. SkinColor, ID necessary?
 //
 message Avatar
 {             
     //
+    // Should the ego-avatar been shown?
+    // Useful for VR-Applications.
+    //
+    optional bool show_host_avatar = 1;
+    
+    //
     // ToDo: Description
     //
-    optional Gender gender = 1;
+    optional Gender gender = 2;
     
-    --> Extra Message: SkinColor, ID, Visibility, Gender,
-    
-    //
+    // The gender of the avatar.
     //
     enum Gender
     {

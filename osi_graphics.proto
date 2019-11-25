@@ -53,7 +53,7 @@ message Graphics
     Open:
     Avatar (?ID, Visibility, Gender, SkinColor(Recherchieren), 
     HideEgo, 
-    SuperSamplingConfiguration (Prozentangabe 0-400 -> Bessere Renderqualität)
+    
     Puffer?
     IsMotionCompensation
     Kopfposition
@@ -189,7 +189,16 @@ message ConfigurationScreen
         optional double size_y = 6;
         
         //
-        // ToDo: Description
+        // ToDo: Description.
+        //
+        // Range: [0, 400]
+        //
+        // Unit: [%]
+        //
+        optional double super_sampling_configuration = 7;
+        
+        //
+        // ToDo: Description.
         //
         optional CameraConfiguration camera_configuration = 7;
     }
@@ -211,25 +220,37 @@ message ConfigurationScreen
         // A cartesian 3D vector for the position, defined in osi_common.
         // This is the position where the virtual camera is placed.
         //
+        // Unit: [m]
+        //
         optional Vector3d position = 1;
 
         //
         // A 3D vector for the orientaion, defined in osi_common.
         // This is the orientation of the virtual camera.
         //
+        // Unit: [rad]
+        //
         optional Orientation3d orientation = 2;
+        
+        //
+        // A 3D vector for the orientaion, defined in osi_common.
+        // This is the orientation-rate of the virtual camera.
+        //
+        // Unit: [rad/s]
+        //
+        optional Orientation3d orientation_rate = 3;
 
         //
         // Should the ego-vehicle been shown?
         // Useful if the camera is inside the ego-vehicle.
         //
-        optional bool showEgoVehicle = 3;
+        optional bool showEgoVehicle = 4;
 
         //
         // Should the ego-avatar been shown?
         // Useful for VR-Applications.
         //
-        optional bool showEgoAvatar = 4;
+        optional bool showEgoAvatar = 5;
         --> Extra Message: Gender, SkinColor, ...
     }
 }
@@ -239,13 +260,24 @@ message ConfigurationScreen
 //
 message ConfigurationVirtualReality
 {
-    // Some open points:
-    FOV (Diagonal, Grad), EnableHMDFrontCamera, 
-
+    //
+    // ToDo: Description - diagonal
+    //
+    // Unit: [mm]
+    //
+    optional double field_of_view_size = 1;
+    
+    //
+    // ToDo: Description - degree
+    //
+    // Unit: []
+    //
+    optional double field_of_view_degree = 2;
+    
     //
     // ToDo: Description
     //
-    optional Vector3d position = 1;
+    optional bool hmd_front_camera_enabled = 3;
 }
 
 // 

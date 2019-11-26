@@ -3,6 +3,7 @@ syntax = "proto2";
 option optimize_for = SPEED;
 
 import "osi_common.proto";
+import "osi_version.proto";
 
 package osi3;
 
@@ -49,15 +50,11 @@ message Graphics
     //
     repeated ConfigurationHMIComponents configuration_hmi_components = 7;
 
-    
-    Open:
-    Puffer?
-    IsMotionCompensation
-    Kopfposition
-
-
-    OSI-Env (Tageszeitentypen, Cloudspeed, Wettertypen, Cloudshadowintensity, Percipitation, TimeofDay)
-    country_code
+    //Open:
+    //Puffer?
+    //IsMotionCompensation
+    //Kopfposition
+    // OSI-Env (Tageszeitentypen, Cloudspeed, Wettertypen, Cloudshadowintensity, Percipitation, TimeofDay) country_code
 }
 
 // 
@@ -146,6 +143,11 @@ message ConfigurationScreen
         // Pixel-height in y of the window inside a display.
         //
         optional double size_y = 6;
+        
+        //
+        // This value can be used instead of size_x or size_y.
+        //
+        optional bool is_fullsize = 7;
     }
     
     // 
@@ -184,18 +186,23 @@ message ConfigurationScreen
         optional double size_y = 6;
         
         //
+        // This value can be used instead of size_x or size_y.
+        //
+        optional bool is_fullsize = 7;
+        
+        //
         // ToDo: Description.
         //
         // Range: [0, 400]
         //
         // Unit: [%]
         //
-        optional double super_sampling_configuration = 7;
+        optional double super_sampling_configuration = 8;
         
         //
         // ToDo: Description.
         //
-        optional ViewConfiguration view_configuration = 8;
+        optional ViewConfiguration view_configuration = 9;
     }
     
     // 
@@ -203,9 +210,6 @@ message ConfigurationScreen
     //
     message ViewConfiguration
     {
-        // Some open points:
-        bFullScreen
-        
         //
         // If this value is false the position is absolute, so the view is fixed to the
         // point defined by the following parameters (position, orientation, ...).
@@ -305,7 +309,7 @@ message ConfigurationVirtualReality
     //
     // Is teleporting available?
     //
-    optional bool is_teleporting_available = 4;
+    optional bool is_teleporting_available = 5;
 }
 
 // 
@@ -315,27 +319,21 @@ message ConfigurationHMIComponents
 {
     // Some open points:
     // Kombi Config
-             bool DashBoardEnable;
-             FString DashBoardURL;
-             FVector2D DashBoardCanvas;
-             FVector2D DashBoardSize;
-             FVector2D DashBoardOffset;
-             FVector2D DashBoardScale;
-             FVector2D DashBoardCanvasLength;
+             //bool DashBoardEnable;
+             //FString DashBoardURL;
+             //FVector2D DashBoardCanvas;
+             //FVector2D DashBoardSize;
+             //FVector2D DashBoardOffset;
+             //FVector2D DashBoardScale;
+             //FVector2D DashBoardCanvasLength;
     // CID Config
-             bool LEDEnable;
-             FString LEDURL;
-             FVector2D LEDCanvas;
-             FVector2D LEDSize;
-             FVector2D LEDOffset;
-             FVector2D LEDScale;
-             FVector2D LEDLength;
-             
-             
-    //
-    // ToDo: Description
-    //
-    optional Vector3d position = 1;
+             //bool LEDEnable;
+             //FString LEDURL;
+             //FVector2D LEDCanvas;
+             //FVector2D LEDSize;
+             //FVector2D LEDOffset;
+             //FVector2D LEDScale;
+             //FVector2D LEDLength;
 }
 
 // 

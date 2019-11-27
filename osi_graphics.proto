@@ -90,7 +90,7 @@ message ConfigurationScreen
         //
         // ID of the graphic engine.
         //
-        optional int graphic_engine_id = 1;
+        optional int32 graphic_engine_id = 1;
     }
 
     // 
@@ -101,12 +101,12 @@ message ConfigurationScreen
         //
         // Defines on which display the window is placed.
         //
-        optional int used_by_graphic_engine_id = 1;
+        optional int32 used_by_graphic_engine_id = 1;
         
         //
         // ID of the display.
         //
-        optional int display_id = 2;
+        optional int32 display_id = 2;
     }
 
     // 
@@ -117,12 +117,12 @@ message ConfigurationScreen
         //
         // Defines on which display the window is placed.
         //
-        optional int placement_on_display_id = 1;
+        optional int32 placement_on_display_id = 1;
         
         //
         // ID of the window.
         //
-        optional int window_id = 2;
+        optional int32 window_id = 2;
         
         //
         // Position x of the window inside a display.
@@ -158,12 +158,12 @@ message ConfigurationScreen
         //
         // Defines on which window the viewport is placed.
         //
-        optional int placement_on_window_id = 1;
+        optional int32 placement_on_window_id = 1;
         
         //
         // ID of the viewport.
         //
-        optional int viewport_id = 2;
+        optional int32 viewport_id = 2;
         
         //
         // Position x of the viewport inside a window.
@@ -223,7 +223,7 @@ message ConfigurationScreen
         // If the position is relative, this parameter defines the distance/offset to which object
         // by id. The position of the object can be found in osi_vehicle or osi_groundtruth.
         //
-        optional int relative_to_id = 2;
+        optional int32 relative_to_id = 2;
 
         //
         // A cartesian 3D vector for the position, defined in osi_common.
@@ -231,7 +231,7 @@ message ConfigurationScreen
         //
         // Unit: [m]
         //
-        optional Vector3d position = 1;
+        optional Vector3d position = 3;
 
         //
         // A 3D vector for the orientaion, defined in osi_common.
@@ -239,7 +239,7 @@ message ConfigurationScreen
         //
         // Unit: [rad]
         //
-        optional Orientation3d orientation = 2;
+        optional Orientation3d orientation = 4;
         
         //
         // A 3D vector for the orientaion, defined in osi_common.
@@ -247,33 +247,33 @@ message ConfigurationScreen
         //
         // Unit: [rad/s]
         //
-        optional Orientation3d orientation_rate = 3;
+        optional Orientation3d orientation_rate = 5;
         
         //
         // ToDo: Description.
         //
-        optional double clipping_far = 4;
+        optional double clipping_far = 6;
         
         //
         // ToDo: Description.
         //
-        optional double clipping_near = 5;
+        optional double clipping_near = 7;
         
         //
         // ToDo: Description.
         //
-        optional double frustum = 6;
+        optional double frustum = 8;
 
         //
         // Should the ego-vehicle been shown?
         // Useful if the camera is inside the ego-vehicle.
         //
-        optional bool show_host_vehicle = 7;
+        optional bool show_host_vehicle = 9;
         
         //
         // ToDo: Description.
         //
-        optional Avatar avatar = 8;
+        optional Avatar avatar = 10;
     }
 }
 

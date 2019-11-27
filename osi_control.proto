@@ -23,16 +23,18 @@ message Control
     optional Timestamp timestamp = 2;
 
     // ID-Number of the sending application.
+    // todo
     //
-    optional uint32 application_sender_id = 3;
-    
-    // The application is the master (true). Otherwise the slave (false).
-    //
-    optional bool is_master = 4;
+    optional uint32 osi_sender_id = 3;
     
     // The state of the application.
     //
-    optional ApplicationStateDefinition application_state = 5;
+    repeated ApplicationState application_state = 5;
+    
+    // Possibility to send commands regarding the target state of a specific application.
+    // \note Not neccessary if the external application(s) just follow(s) the application_state of the master.
+    //
+    repeated ApplicationCommand application_command = 6;
     
     // The frames per second.
     //
@@ -53,91 +55,173 @@ message Control
     // All active or inactive events.
     //
     repeated Event event = 9;
-    
-    // Possibility to send commands regarding the target state of a specific application.
-    // \note Not neccessary if the external application(s) just follow(s) the application_state of the master.
-    //
-    repeated ApplicationStateCommand application_state_command = 10;
 }
 
 // 
-// \brief Definition of possible application-states.
-// These are also used as commands in the message ApplicationStateCommand.
+// \brief This message contains the state of a sender-id adressed to a receiver-id.
+// In this way it is also possible that the osi-sender tells the receiver-side about the
+// state of another own application part. 
 //
-message ApplicationStateDefinition
+message ApplicationState
 {
-    // The state of an application.
+    // ID-Number of the sender-application(part).
     //
-    optional ApplicationState application_state = 1;
+    optional uint32 application_sender_id = 1;
+    
+    // The sender-application(part) is the master (true). Otherwise a slave (false).
+    //
+    optional bool is_master = 2;
+    
+    // ID-Number of the receiver-application(part).
+    //
+    optional uint32 application_receiver_id = 3;
+    
+    // This is the state of the sender-id addressed to the receiver-id.
+    //
+    optional State application_state = 4;
     
     // Definition of possible application-states.
     //
-    enum ApplicationState
+    enum State
     {
-        // The application is created and alive.
+        // The application-state is unknown.
         //
-        APPLICATION_STATE_UNKNOWN = 0;
+        STATE_UNKNOWN = 0;
+        
+        // The application-state is another one.
+        //
+        STATE_OTHER = 1;
         
         // The application is created and alive.
         //
-        APPLICATION_STATE_OTHER = 1;
-        
-        // The application is created and alive.
-        //
-        APPLICATION_STATE_ALIVE = 2;
+        STATE_ALIVE = 2;
 
         // The application is initializing.
-        // Transition: STATE_ALIVE ==> STATE_INITIALIZED
+        // Transition: STATE_ALIVE ==> STATE_INITIALIZING ==> STATE_INITIALIZED
         //
-        APPLICATION_STATE_INITIALIZING = 3;
+        STATE_INITIALIZING = 3;
 
         // The application is initialized.
         //
-        APPLICATION_STATE_INITIALIZED = 4;
+        STATE_INITIALIZED = 4;
 
         // The application is starting.
         // Transition: STATE_INITIALIZED ==> STATE_RUNNING
         //
-        APPLICATION_STATE_STARTING = 5;
+        STATE_STARTING = 5;
 
         // The application is running.
         //
-        APPLICATION_STATE_RUNNING = 6;
+        STATE_RUNNING = 6;
+        
+        // The application is pausing.
+        // Transition: STATE_RUNNING ==> STATE_INITIALIZED
+        //
+        STATE_PAUSING = 7;
 
         // The application is paused.
         //
-        APPLICATION_STATE_PAUSED = 7;
+        STATE_PAUSED = 8;
+        
+        // The application is continueing.
+        // Transition: STATE_PAUSED ==> STATE_CONTINUEING
+        //
+        STATE_CONTINUEING = 9;
+
+        // The application is continueing.
+        // Transition: STATE_RUNNING ==> STATE_STOPPING
+        //
+        STATE_STOPPING = 10;
 
         // The application is stopped.
-        // Transition: STATE_RUNNING ==> STATE_INITIALIZED
+        // Transition: STATE_RUNNING ==> STATE_STOPPED
         //
-        APPLICATION_STATE_STOPPED = 8;
+        STATE_STOPPED = 11;
 
         // The application is resetting.
         // Transition: STATE_INITIALIZED ==> STATE_ALIVE
         // Transition: STATE_RUNNING ==> STATE_ALIVE
         // Transition: STATE_FAILED ==> STATE_ALIVE
         //
-        APPLICATION_STATE_RESETTING = 9;
+        STATE_RESETTING = 12;
 
         // An Error occured in the application.
         //
-        APPLICATION_STATE_FAILURE = 10;
+        STATE_FAILED = 13;
     }
 }
 
 // 
-// \brief Definition of possible commands regarding the target state another application should have.
+// \brief This message contains the command of a sender-id adressed to a receiver-id.
+// In this way it is also possible that the osi-sender tells the receiver-side about a
+// command of another own application part. 
 //
-message ApplicationStateCommand
+message ApplicationCommand
 {
-    // ID-Number of the receiver-application.
+    // ID-Number of the sender-application(part).
     //
-    optional uint32 application_receiver_id = 1;
+    optional uint32 application_sender_id = 1;
     
-    // This is the target state the receiver-application should have or change to.
+    // The sender-application(part) is the master (true). Otherwise a slave (false).
     //
-    optional ApplicationStateDefinition application_state_command = 2;
+    optional bool is_master = 2;
+    
+    // ID-Number of the receiver-application(part).
+    //
+    optional uint32 application_receiver_id = 3;
+    
+    // This is the command regarding the state of receiver-id.
+    //
+    optional Command application_command = 4;
+    
+    // Definition of possible commands from the sender to the receiver.
+    //
+    enum Command
+    {
+        // The command is unknown.
+        //
+        COMMAND_UNKNOWN = 0;
+        
+        // The command is another one.
+        //
+        COMMAND_OTHER = 1;
+
+        // The receiver should initialize.
+        // Transition: STATE_ALIVE ==> STATE_INITIALIZING ==> STATE_INITIALIZED
+        //
+        COMMAND_INITIALIZE = 2;
+
+        // The receiver should start.
+        // Transition: STATE_INITIALIZED ==> STATE_STARTING ==> STATE_RUNNING
+        //
+        COMMAND_START = 3;
+
+        // The receiver should pause.
+        // Transition: STATE_RUNNING ==> STATE_PAUSING ==> STATE_PAUSED
+        //
+        COMMAND_PAUSE = 4;
+
+        // The receiver should continue.
+        // Transition: STATE_PAUSED ==> STATE_CONTINUEING ==> STATE_RUNNING
+        //
+        COMMAND_CONTINUE = 5;
+
+        // The receiver should stop.
+        // Transition: STATE_RUNNING ==> STATE_STOPPING ==> STATE_STOPPED
+        // Transition: STATE_PAUSED ==> STATE_STOPPING ==> STATE_STOPPED
+        //
+        COMMAND_STOP = 6;
+
+        // The receiver should reset.
+        // Transition: STATE_ALIVE ==> STATE_RESETTING ==> STATE_ALIVE
+        // Transition: STATE_INITIALIZED ==> STATE_RESETTING ==> STATE_ALIVE
+        // Transition: STATE_RUNNING ==> STATE_RESETTING ==> STATE_ALIVE
+        // Transition: STATE_PAUSED ==> STATE_RESETTING ==> STATE_ALIVE
+        // Transition: STATE_STOPPED ==> STATE_RESETTING ==> STATE_ALIVE
+        // Transition: STATE_FAILED ==> STATE_RESETTING ==> STATE_ALIVE
+        //
+        COMMAND_RESET = 7;
+    }
 }
 
 // 

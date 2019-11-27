@@ -8,11 +8,11 @@ import "osi_version.proto";
 package osi3;
 
 //
-// \brief This format is thought to inform stand-alone applications about the actual state of the sender. 
+// \brief This format is thought to inform stand-alone applications about the actual state of the sender.
 // Furthermore the other application can be controlled by commands to change its state.
-// The fromate is flexible so it is even possible to inform about the state of application-parts 
-// of the sender or change the state of application-parts of the receiver. 
-// This can be helpful to organize the communication e.g. between a simulation-environment and 
+// The fromate is flexible so it is even possible to inform about the state of application-parts
+// of the sender or change the state of application-parts of the receiver.
+// This can be helpful to organize the communication e.g. between a simulation-environment and
 // a graphic-engine (and its slaves).
 //
 message Control
@@ -21,7 +21,7 @@ message Control
     // The interface version used by the sender.
     //
     optional InterfaceVersion version = 1;
-    
+
     // The data timestamp of the simulation environment. The zero time point is
     // arbitrary but must be identical for all messages.
     // Recommendation: Zero time point for start point of the simulation.
@@ -31,20 +31,20 @@ message Control
     // ID-Number of the sending application, to identify who sent the message.
     //
     optional uint32 osi_sender_id = 3;
-    
+
     // The state of the application.
     //
     repeated ApplicationState application_state = 4;
-    
+
     // Possibility to send commands regarding the target state of a specific application.
     // \note Not neccessary if the external application(s) just follow(s) the application_state of the master.
     //
     repeated ApplicationCommand application_command = 5;
-    
+
     // The frames per second.
     //
     optional double fps = 6;
-    
+
     // The duration of the ping.
     //
     // Unit: [ms]
@@ -64,7 +64,7 @@ message Control
     repeated Event event = 9;
 }
 
-// 
+//
 // \brief This message contains the state of a sender-id adressed to a receiver-id.
 // In this way it is also possible that the osi-sender tells the receiver-side about the
 // state of another own application part. 
@@ -74,19 +74,19 @@ message ApplicationState
     // ID-Number of the sender-application(part).
     //
     optional uint32 application_sender_id = 1;
-    
+
     // The sender-application(part) is the master (true). Otherwise a slave (false).
     //
     optional bool is_master = 2;
-    
+
     // ID-Number of the receiver-application(part).
     //
     optional uint32 application_receiver_id = 3;
-    
+
     // This is the state of the sender-id addressed to the receiver-id.
     //
     optional State application_state = 4;
-    
+
     // Definition of possible application-states.
     //
     // \note It is implementation-specific which states are available.
@@ -96,11 +96,11 @@ message ApplicationState
         // The application-state is unknown.
         //
         STATE_UNKNOWN = 0;
-        
+
         // The application-state is another one.
         //
         STATE_OTHER = 1;
-        
+
         // The application is created and alive.
         //
         STATE_ALIVE = 2;
@@ -120,7 +120,7 @@ message ApplicationState
         // The application is running.
         //
         STATE_RUNNING = 6;
-        
+
         // The application is pausing.
         //
         STATE_PAUSING = 7;
@@ -128,7 +128,7 @@ message ApplicationState
         // The application is paused.
         //
         STATE_PAUSED = 8;
-        
+
         // The application is continueing.
         //
         STATE_CONTINUEING = 9;
@@ -152,7 +152,7 @@ message ApplicationState
     }
 }
 
-// 
+//
 // \brief This message contains the command of a sender-id adressed to a receiver-id.
 // In this way it is also possible that the osi-sender tells the receiver-side about a
 // command of another own application part. 
@@ -162,19 +162,19 @@ message ApplicationCommand
     // ID-Number of the sender-application(part).
     //
     optional uint32 application_sender_id = 1;
-    
+
     // The sender-application(part) is the master (true). Otherwise a slave (false).
     //
     optional bool is_master = 2;
-    
+
     // ID-Number of the receiver-application(part).
     //
     optional uint32 application_receiver_id = 3;
-    
+
     // This is the command regarding the state of receiver-id.
     //
     optional Command application_command = 4;
-    
+
     // Definition of possible commands from the sender to the receiver.
     //
     enum Command
@@ -182,7 +182,7 @@ message ApplicationCommand
         // The command is unknown.
         //
         COMMAND_UNKNOWN = 0;
-        
+
         // The command is another one.
         //
         COMMAND_OTHER = 1;
@@ -225,7 +225,7 @@ message ApplicationCommand
     }
 }
 
-// 
+//
 // \brief Possibility to send a notification.
 // Can be used to send e.g. error-messages.
 //
@@ -238,7 +238,7 @@ message Notification
     // Defines the type of the notification.
     //
     optional NotificationType notification_type = 2;
-    
+
     // Definition of possible notification-types.
     //
     enum NotificationType
@@ -246,11 +246,11 @@ message Notification
         // The type is unknown.
         //
         NOTIFICATION_TYPE_UNKNOWN = 0;
-        
+
         // It is another type.
         //
         NOTIFICATION_TYPE_OTHER = 1;
-        
+
         // An error occurred.
         //
         NOTIFICATION_TYPE_ERROR = 2;
@@ -269,7 +269,7 @@ message Notification
     }
 }
 
-// 
+//
 // \brief Possibility to trigger an event.
 //
 // \note It is implementation-specific which event is triggered.

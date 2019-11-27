@@ -3,11 +3,17 @@ syntax = "proto2";
 option optimize_for = SPEED;
 
 import "osi_common.proto";
+import "osi_version.proto";
 
 package osi3;
 
 //
-// \brief This format is thought to control stand-alone parts of a simulation (e.g. a graphics-application).
+// \brief This format is thought to inform stand-alone applications about the actual state of the sender. 
+// Furthermore the other application can be controlled by commands to change its state.
+// The fromate is flexible so it is even possible to inform about the state of application-parts 
+// of the sender or change the state of application-parts of the receiver. 
+// This can be helpful to organize the communication e.g. between a simulation-environment and 
+// a graphic-engine (and its slaves).
 //
 message Control
 {
@@ -22,19 +28,18 @@ message Control
     //
     optional Timestamp timestamp = 2;
 
-    // ID-Number of the sending application.
-    // todo
+    // ID-Number of the sending application, to identify who sent the message.
     //
     optional uint32 osi_sender_id = 3;
     
     // The state of the application.
     //
-    repeated ApplicationState application_state = 5;
+    repeated ApplicationState application_state = 4;
     
     // Possibility to send commands regarding the target state of a specific application.
     // \note Not neccessary if the external application(s) just follow(s) the application_state of the master.
     //
-    repeated ApplicationCommand application_command = 6;
+    repeated ApplicationCommand application_command = 5;
     
     // The frames per second.
     //
@@ -53,6 +58,8 @@ message Control
     repeated Notification notification = 8;
 
     // All active or inactive events.
+    //
+    // \note It is implementation-specific which event is triggered.
     //
     repeated Event event = 9;
 }
@@ -82,6 +89,8 @@ message ApplicationState
     
     // Definition of possible application-states.
     //
+    // \note It is implementation-specific which states are available.
+    //
     enum State
     {
         // The application-state is unknown.
@@ -97,7 +106,6 @@ message ApplicationState
         STATE_ALIVE = 2;
 
         // The application is initializing.
-        // Transition: STATE_ALIVE ==> STATE_INITIALIZING ==> STATE_INITIALIZED
         //
         STATE_INITIALIZING = 3;
 
@@ -106,7 +114,6 @@ message ApplicationState
         STATE_INITIALIZED = 4;
 
         // The application is starting.
-        // Transition: STATE_INITIALIZED ==> STATE_RUNNING
         //
         STATE_STARTING = 5;
 
@@ -115,7 +122,6 @@ message ApplicationState
         STATE_RUNNING = 6;
         
         // The application is pausing.
-        // Transition: STATE_RUNNING ==> STATE_INITIALIZED
         //
         STATE_PAUSING = 7;
 
@@ -124,28 +130,23 @@ message ApplicationState
         STATE_PAUSED = 8;
         
         // The application is continueing.
-        // Transition: STATE_PAUSED ==> STATE_CONTINUEING
         //
         STATE_CONTINUEING = 9;
 
-        // The application is continueing.
-        // Transition: STATE_RUNNING ==> STATE_STOPPING
+        // The application is stopping.
         //
         STATE_STOPPING = 10;
 
         // The application is stopped.
-        // Transition: STATE_RUNNING ==> STATE_STOPPED
         //
         STATE_STOPPED = 11;
 
         // The application is resetting.
-        // Transition: STATE_INITIALIZED ==> STATE_ALIVE
-        // Transition: STATE_RUNNING ==> STATE_ALIVE
-        // Transition: STATE_FAILED ==> STATE_ALIVE
         //
         STATE_RESETTING = 12;
 
         // An Error occured in the application.
+        // Recommendation: Send a notification about the failure.
         //
         STATE_FAILED = 13;
     }

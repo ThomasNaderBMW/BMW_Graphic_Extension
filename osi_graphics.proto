@@ -38,17 +38,17 @@ message Graphics
     // Here is the main information about how a screen is configured.
     // E.g.: Place of the camera, screen-configuration, avatar information, ...
     //
-    optional ConfigurationScreen configuration_screen = 5;
+    optional ScreenConfiguration screen_configuration = 5;
     
     //
     // ToDo: Description
     //
-    optional ConfigurationVirtualReality configuration_virtual_reality = 6;
+    optional VirtualRealityConfiguration virtual_reality_configuration = 6;
     
     //
     // ToDo: Description
     //
-    repeated ConfigurationHMIComponents configuration_hmi_components = 7;
+    repeated HMIComponentsConfiguration hmi_components_configuration = 7;
 
     //Open:
     //Puffer?
@@ -60,7 +60,7 @@ message Graphics
 // 
 // \brief ToDo: Description
 //
-message ConfigurationScreen
+message ScreenConfiguration
 {    
     //
     // \brief ToDo: Description
@@ -90,7 +90,7 @@ message ConfigurationScreen
         //
         // ID of the graphic engine.
         //
-        optional int32 graphic_engine_id = 1;
+        optional uint64 graphic_engine_id = 1;
     }
 
     // 
@@ -101,12 +101,12 @@ message ConfigurationScreen
         //
         // Defines on which display the window is placed.
         //
-        optional int32 used_by_graphic_engine_id = 1;
+        optional uint64 used_by_graphic_engine_id = 1;
         
         //
         // ID of the display.
         //
-        optional int32 display_id = 2;
+        optional uint64 display_id = 2;
     }
 
     // 
@@ -117,12 +117,12 @@ message ConfigurationScreen
         //
         // Defines on which display the window is placed.
         //
-        optional int32 placement_on_display_id = 1;
+        optional uint64 placement_on_display_id = 1;
         
         //
         // ID of the window.
         //
-        optional int32 window_id = 2;
+        optional uint64 window_id = 2;
         
         //
         // Position x of the window inside a display.
@@ -158,12 +158,12 @@ message ConfigurationScreen
         //
         // Defines on which window the viewport is placed.
         //
-        optional int32 placement_on_window_id = 1;
+        optional uint64 placement_on_window_id = 1;
         
         //
         // ID of the viewport.
         //
-        optional int32 viewport_id = 2;
+        optional uint64 viewport_id = 2;
         
         //
         // Position x of the viewport inside a window.
@@ -223,7 +223,7 @@ message ConfigurationScreen
         // If the position is relative, this parameter defines the distance/offset to which object
         // by id. The position of the object can be found in osi_vehicle or osi_groundtruth.
         //
-        optional int32 relative_to_id = 2;
+        optional uint64 relative_to_id = 2;
 
         //
         // A cartesian 3D vector for the position, defined in osi_common.
@@ -280,7 +280,7 @@ message ConfigurationScreen
 // 
 // \brief ToDo: Description
 //
-message ConfigurationVirtualReality
+message VirtualRealityConfiguration
 {
     //
     // ToDo: Description - diagonal
@@ -300,12 +300,12 @@ message ConfigurationVirtualReality
     // ToDo: Description
     //
     optional bool hmd_front_camera_enabled = 3;
-    
+
     //
     // Is it a vulnerable road user (e.g. pedestrian)?
     //
     optional bool is_vulnerable_road_user = 4;
-    
+
     //
     // Is teleporting available?
     //
@@ -315,7 +315,7 @@ message ConfigurationVirtualReality
 // 
 // \brief ToDo: Description
 //
-message ConfigurationHMIComponents
+message HMIComponentsConfiguration
 {
     // Some open points:
     // Kombi Config
@@ -346,12 +346,12 @@ message Avatar
     // Useful for VR-Applications.
     //
     optional bool show_host_avatar = 1;
-    
+
     //
     // ToDo: Description
     //
     optional Gender gender = 2;
-    
+
     // The gender of the avatar.
     //
     enum Gender
@@ -367,7 +367,7 @@ message Avatar
         // The gender is female.
         //
         GENDER_FEMALE = 2;
-        
+
         // The gender is male.
         //
         GENDER_MALE = 3;

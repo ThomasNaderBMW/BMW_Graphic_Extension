@@ -8,7 +8,7 @@ import "osi_version.proto";
 package osi3;
 
 //
-// \brief This format describes the graphic-configurationis made in the 
+// \brief This format describes the graphic-configuration made in the 
 // simulation-master. So stand-alone graphicengines can work because of
 // these information.
 //

@@ -62,11 +62,11 @@ message Control
     // \note It is implementation-specific which event is triggered.
     //
     repeated Event event = 9;
-
+    
     //
     // \brief This message contains the state of a sender-id adressed to a receiver-id.
     // In this way it is also possible that the osi-sender tells the receiver-side about the
-    // state of another own application part.
+    // state of another own application part. 
     //
     message ApplicationState
     {
@@ -154,7 +154,7 @@ message Control
     //
     // \brief This message contains the command of a sender-id adressed to a receiver-id.
     // In this way it is also possible that the osi-sender tells the receiver-side about a
-    // command of another own application part.
+    // command of another own application part. 
     //
     message ApplicationCommand
     {

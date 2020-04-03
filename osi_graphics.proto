@@ -3,6 +3,7 @@ syntax = "proto2";
 option optimize_for = SPEED;
 
 import "osi_common.proto";
+import "osi_environment.proto";
 import "osi_version.proto";
 
 package osi3;
@@ -35,6 +36,11 @@ message Graphics
     optional string map_reference = 3;
     
     //
+    // ToDo: Description
+    //
+    optional VisualizationMode visualization_mode = 4;
+    
+    //
     // Here is the main information about how a screen is configured.
     // E.g.: Place of the camera, screen-configuration, avatar information, ...
     //
@@ -50,11 +56,36 @@ message Graphics
     //
     repeated HMIComponentsConfiguration hmi_components_configuration = 7;
 
+    // The mode of the visualization.
+    //
+    enum VisualizationMode
+    {
+        // The visualization mode is unknown.
+        //
+        VISUALIZATION_MODE_UNKNOWN = 0;
+
+        // The visualization mode is another one.
+        //
+        VISUALIZATION_MODE_OTHER = 1;
+
+        // The visualization mode is virtual-reality.
+        //
+        VISUALIZATION_MODE_VIRTUAL_REALITY = 2;
+
+        // The visualization mode is single-screen.
+        //
+        VISUALIZATION_MODE_SINGLE_SCREEN = 3;
+        
+        // The visualization mode is multi-screen.
+        //
+        VISUALIZATION_MODE_MULTI_SCREEN = 4;
+    }
+    
     //Open:
-    //Puffer?
-    //IsMotionCompensation
     //Kopfposition
     // OSI-Env (Tageszeitentypen, Cloudspeed, Wettertypen, Cloudshadowintensity, Percipitation, TimeofDay) country_code
+    // HUD Information
+    // SPOUT plane
 }
 
 // 
@@ -81,6 +112,15 @@ message ScreenConfiguration
     // \brief ToDo: Description
     //
     repeated ViewportConfiguration viewport_configuration = 4;
+    
+    //
+    // ToDo: Description.
+    //
+    // Range: [0, 400]
+    //
+    // Unit: [%]
+    //
+    optional double super_sampling_configuration = 5;
     
     // 
     // \brief ToDo: Description
@@ -193,15 +233,6 @@ message ScreenConfiguration
         //
         // ToDo: Description.
         //
-        // Range: [0, 400]
-        //
-        // Unit: [%]
-        //
-        optional double super_sampling_configuration = 8;
-        
-        //
-        // ToDo: Description.
-        //
         optional ViewConfiguration view_configuration = 9;
     }
     
@@ -262,7 +293,7 @@ message ScreenConfiguration
         //
         // ToDo: Description.
         //
-        optional double frustum = 8;
+        optional int32 frustum = 8;
 
         //
         // Should the ego-vehicle been shown?
@@ -310,6 +341,16 @@ message VirtualRealityConfiguration
     // Is teleporting available?
     //
     optional bool is_teleporting_available = 5;
+    
+    //
+    // Is the motion compensation enabled?
+    //
+    optional bool motion_compensation_enabled = 6;
+    
+    //
+    // Is the HMD-calibration enabled?
+    //
+    optional bool hmd_calibration_enabled = 7;
 }
 
 // 

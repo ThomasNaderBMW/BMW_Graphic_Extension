@@ -114,13 +114,18 @@ message ScreenConfiguration
     repeated ViewportConfiguration viewport_configuration = 4;
     
     //
+    // ID of the screen.
+    //
+    optional uint64 screen_id = 5;
+    
+    //
     // ToDo: Description.
     //
     // Range: [0, 400]
     //
     // Unit: [%]
     //
-    optional double super_sampling_configuration = 5;
+    optional double super_sampling_configuration = 6;
     
     // 
     // \brief ToDo: Description

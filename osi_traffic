@@ -24,6 +24,7 @@ message Traffic
     //
     // The data timestamp of the simulation environment. The zero time point is
     // arbitrary but must be identical for all messages.
+    // Recommendation: Stamp at the end of the mapping.
     // Recommendation: Zero time point for start point of the simulation.
     //
     optional Timestamp timestamp = 2;

@@ -9,7 +9,14 @@ import "osi_occupant.proto";
 
 package osi3;
 
-message Traffic
+//
+// \brief The vehicle message describes a single vehicle in a deeper way than any other osi-class.
+// As it is an description of the whole vehicle it can be used as interface for various reasons, 
+// e.g. to the vehicle/dynamic-model for kinematics calculation or even for measurements in real vehicles.
+// It is based on the message VehicleClass, which is also defined later in this proto.
+// The vehicle can be the host but also any other participant.
+//
+message Vehicle
 {
     //
     // The interface version used by the sender (i.e. the simulation environment).
@@ -24,21 +31,21 @@ message Traffic
     optional Timestamp timestamp = 2;
 
     //
-    // The ID of the host vehicle object.
+    // True, if the following vehicle-object is the host.
     //
-    optional Identifier host_vehicle_id = 3;
+    optional bool is_host_vehicle = 3;
 
     //
-    // Deeper going description of one or more vehicle regarding these aspects:
+    // Deeper going description of one vehicle regarding these aspects:
     // Vehicle-Basics, Vehicle-Kinematics, Vehicle-Powertrain, Vehicle-SteeringWheel, Vehicle-Wheels,
     // Vehicle-Light-State, Vehicle-Localization, Vehicle-Automated-Driving-Functions.
     //
-    repeated VehicleClass vehicle = 4;
+    optional VehicleClass vehicle = 4;
 }
 
 //
-// \brief The vehicle-message is a deeper description of a vehicle.
-// Consists of different messages categorizing the vehicle in:
+// \brief The vehicle class is a deeper description of a vehicle.
+// It consists of different messages categorizing the vehicle in:
 // Vehicle-Basics, Vehicle-Kinematics, Vehicle-Powertrain, Vehicle-SteeringWheel, Vehicle-Wheels,
 // Vehicle-Light-State, Vehicle-Localization, Vehicle-Automated-Driving-Functions.
 // As it is an description of the whole vehicle (focus on cars) it can be used as interface for various reasons, 

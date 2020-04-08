@@ -9,10 +9,10 @@ import "osi_vehicle.proto";
 package osi3;
 
 //
-// \brief The second message describes the traffic on the map (or an implementation-specific area).
+// \brief This message describes the traffic on the map (or an implementation-specific area).
 // This can also include the host-vehicle.
-// The main-usage so far is the visualisation of traffic in a graphic-engine.
-// It is based on the message VehicleClass, which is also defined next in this proto.
+// The main-usage so far is the visualization of traffic in a graphic-engine.
+// It is based on the message VehicleClass, which is defined in the included osi_vehicle.proto.
 //
 message Traffic
 {

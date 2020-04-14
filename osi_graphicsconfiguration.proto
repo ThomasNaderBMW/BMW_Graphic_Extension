@@ -438,18 +438,18 @@ message HeadUpDisplay
     //
     // ID of the target the head-up display is attached to.
     //
-    optional uint64 target_id = 0;
+    optional uint64 target_id = 1;
 
     //
     // Defines the position of the head-up display relative to the target it is attached to
     // in world coordinates.
     //
-    optional Vector3d position = 1;
+    optional Vector3d position = 2;
     
     //
     // Size of the head-up display in percent.
     //
-    optional double size = 2;
+    optional double size = 3;
 }
 
 
@@ -461,16 +461,16 @@ message SpoutPlane
     //
     // ID of the target the spout plane is attached to.
     //
-    optional uint64 target_id = 0;
+    optional uint64 target_id = 1;
 
     //
     // Defines the position of the spout plane relative to the target it is attached to
     // in world coordinates.
     //
-    optional Vector3d position = 1;
+    optional Vector3d position = 2;
     
     //
     // Size of the spout plane in percent.
     //
-    optional double size = 2;
+    optional double size = 3;
 }

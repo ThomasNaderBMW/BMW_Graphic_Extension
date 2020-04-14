@@ -55,6 +55,16 @@ message GraphicsConfiguration
     // ToDo: Description
     //
     repeated HMIComponentsConfiguration hmi_components_configuration = 7;
+    
+    //
+    // ToDo: Description
+    //
+    optional HeadUpDisplay head_up_display = 8;
+    
+    //
+    // ToDo: Description
+    //
+    optional SpoutPlane spout_plane = 9;
 
     // The mode of the visualization.
     //
@@ -418,4 +428,49 @@ message Avatar
         //
         GENDER_MALE = 3;
     }
+}
+
+//
+// ToDo: Description
+//
+message HeadUpDisplay
+{
+    //
+    // ID of the target the head-up display is attached to.
+    //
+    optional uint64 target_id = 0;
+
+    //
+    // Defines the position of the head-up display relative to the target it is attached to
+    // in world coordinates.
+    //
+    optional Vector3d position = 1;
+    
+    //
+    // Size of the head-up display in percent.
+    //
+    optional double size = 2;
+}
+
+
+//
+// ToDo: Description
+//
+message SpoutPlane
+{
+    //
+    // ID of the target the spout plane is attached to.
+    //
+    optional uint64 target_id = 0;
+
+    //
+    // Defines the position of the spout plane relative to the target it is attached to
+    // in world coordinates.
+    //
+    optional Vector3d position = 1;
+    
+    //
+    // Size of the spout plane in percent.
+    //
+    optional double size = 2;
 }

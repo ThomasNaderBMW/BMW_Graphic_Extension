@@ -14,6 +14,7 @@ package osi3;
 // these information.
 //
 message GraphicsConfiguration
+{
     //
     // The interface version used by the sender.
     //

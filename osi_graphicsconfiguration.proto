@@ -59,12 +59,12 @@ message GraphicsConfiguration
     //
     // ToDo: Description
     //
-    optional HeadUpDisplay head_up_display = 8;
+    repeated HeadUpDisplay head_up_display = 8;
     
     //
     // ToDo: Description
     //
-    optional SpoutPlane spout_plane = 9;
+    repeated SpoutPlane spout_plane = 9;
 
     // The mode of the visualization.
     //

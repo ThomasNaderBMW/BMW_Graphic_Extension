@@ -309,6 +309,11 @@ message ScreenConfiguration
         // ToDo: Description.
         //
         optional int32 frustum = 8;
+        
+        //
+        // ToDo: Description.
+        //
+        optional Frustum frustum = 8;
 
         //
         // Should the ego-vehicle been shown?
@@ -320,6 +325,33 @@ message ScreenConfiguration
         // ToDo: Description.
         //
         optional Avatar avatar = 10;
+        
+        //
+        // ToDo: Description.
+        //
+        message Frustum
+        {
+            //
+            // ToDo: Description.
+            //
+            optional double left = 1;
+
+            //
+            // ToDo: Description.
+            //
+            optional double right = 2;
+            
+             //
+            // ToDo: Description.
+            //
+            optional double top = 3;
+            
+            //
+            // ToDo: Description.
+            //
+            optional double bottom = 4;
+            
+        }
     }
 }
 

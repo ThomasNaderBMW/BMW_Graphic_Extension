@@ -308,11 +308,6 @@ message ScreenConfiguration
         //
         // ToDo: Description.
         //
-        optional int32 frustum = 8;
-        
-        //
-        // ToDo: Description.
-        //
         optional Frustum frustum = 8;
 
         //

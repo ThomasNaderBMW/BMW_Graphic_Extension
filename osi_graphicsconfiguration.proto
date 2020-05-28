@@ -64,6 +64,15 @@ message GraphicsConfiguration
     // ToDo: Description
     //
     repeated SpoutPlane spout_plane = 9;
+    
+    //
+    // ToDo: Description.
+    //
+    // Range: [0, 400]
+    //
+    // Unit: [%]
+    //
+    optional double super_sampling_configuration = 10;
 
     // The mode of the visualization.
     //
@@ -126,15 +135,6 @@ message ScreenConfiguration
     // ID of the screen.
     //
     optional uint64 screen_id = 5;
-    
-    //
-    // ToDo: Description.
-    //
-    // Range: [0, 400]
-    //
-    // Unit: [%]
-    //
-    optional double super_sampling_configuration = 6;
     
     // 
     // \brief ToDo: Description

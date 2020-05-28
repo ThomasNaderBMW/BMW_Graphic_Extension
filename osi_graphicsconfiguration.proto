@@ -353,45 +353,31 @@ message ScreenConfiguration
 // \brief ToDo: Description
 //
 message VirtualRealityConfiguration
-{
-    //
-    // ToDo: Description - diagonal
-    //
-    // Unit: [mm]
-    //
-    optional double field_of_view_size = 1;
-    
-    //
-    // ToDo: Description - degree
-    //
-    // Unit: []
-    //
-    optional double field_of_view_degree = 2;
-    
+{   
     //
     // ToDo: Description
     //
-    optional bool hmd_front_camera_enabled = 3;
+    optional bool hmd_front_camera_enabled = 1;
 
     //
     // Is it a vulnerable road user (e.g. pedestrian)?
     //
-    optional bool is_vulnerable_road_user = 4;
+    optional bool is_vulnerable_road_user = 2;
 
     //
     // Is teleporting available?
     //
-    optional bool is_teleporting_available = 5;
+    optional bool is_teleporting_available = 3;
     
     //
     // Is the motion compensation enabled?
     //
-    optional bool motion_compensation_enabled = 6;
+    optional bool motion_compensation_enabled = 4;
     
     //
     // Is the HMD-calibration enabled?
     //
-    optional bool hmd_calibration_enabled = 7;
+    optional bool hmd_calibration_enabled = 5;
 }
 
 // 

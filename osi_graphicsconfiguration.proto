@@ -65,6 +65,11 @@ message GraphicsConfiguration
     // ToDo: Description
     //
     repeated SpoutPlane spout_plane = 9;
+    
+    //
+    // Defines the target type of the simulation.
+    //
+    optional VisualizationTarget visualization_target = 10;
 
     // The mode of the visualization.
     //
@@ -89,6 +94,27 @@ message GraphicsConfiguration
         // The visualization mode is multi-screen.
         //
         VISUALIZATION_MODE_MULTI_SCREEN = 4;
+    }
+    
+    // Simulation target types.
+    //
+    enum VisualizationTarget
+    {
+        // The visualization target is unknown.
+        //
+        VISUALIZATION_TARGET_UNKNOWN = 0;
+
+        // The visualization target is another one.
+        //
+        VISUALIZATION_TARGET_OTHER = 1;
+
+        // The visualization target is a vehicle.
+        //
+        VISUALIZATION_TARGET_VEHICLE = 2;
+
+        // The visualization target is a pedestrian.
+        //
+        VISUALIZATION_TARGET_PEDESTRIAN = 3;
     }
     
     //Open:

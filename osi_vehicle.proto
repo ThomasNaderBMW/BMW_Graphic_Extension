@@ -106,6 +106,11 @@ message VehicleClass
     // The focus here is on states and intentions of a function.
     //
     repeated VehicleAutomatedDrivingFunction vehicle_automated_driving_function = 9;
+    
+    //
+    // Defines the driver avatar of the vehicle.
+    //
+    optional Avatar vehicle_avatar = 10;
 
     //
     // \brief The absolut base parameters of the vehicle.
@@ -939,4 +944,42 @@ message Notification
         NOTIFICATION_TYPE_DEBUG = 5;
     }
 }
+
+//
+// \brief Defines a single avatar sitting inside the vehicle.
+//
+message Avatar
+{
+    //
+    // Flag to indicate whether the avatar is visible.
+    //
+    optional bool show_avatar = 1;
+
+    //
+    // Gender of the avatar.
+    //
+    optional Gender gender = 3;
+
+    // The gender of the avatar.
+    //
+    enum Gender
+    {
+        // The gender is unknown.
+        //
+        GENDER_UNKNOWN = 0;
+
+        // It is another gender.
+        //
+        GENDER_OTHER = 1;
+
+        // The gender is female.
+        //
+        GENDER_FEMALE = 2;
+
+        // The gender is male.
+        //
+        GENDER_MALE = 3;
+    }
+}
+
 

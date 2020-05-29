@@ -4,6 +4,7 @@ option optimize_for = SPEED;
 
 import "osi_common.proto";
 import "osi_version.proto";
+import "osi_vehicle.proto";
 
 package osi3;
 
@@ -64,15 +65,6 @@ message GraphicsConfiguration
     // ToDo: Description
     //
     repeated SpoutPlane spout_plane = 9;
-    
-    //
-    // ToDo: Description.
-    //
-    // Range: [0, 400]
-    //
-    // Unit: [%]
-    //
-    optional double super_sampling_configuration = 10;
 
     // The mode of the visualization.
     //
@@ -135,6 +127,15 @@ message ScreenConfiguration
     // ID of the screen.
     //
     optional uint64 screen_id = 5;
+    
+    //
+    // ToDo: Description.
+    //
+    // Range: [0, 400]
+    //
+    // Unit: [%]
+    //
+    optional double super_sampling_configuration = 6;
     
     // 
     // \brief ToDo: Description
@@ -402,44 +403,6 @@ message HMIComponentsConfiguration
              //FVector2D LEDOffset;
              //FVector2D LEDScale;
              //FVector2D LEDLength;
-}
-
-// 
-// \brief ToDo: Description. SkinColor, ID necessary?
-//
-message Avatar
-{             
-    //
-    // Should the ego-avatar been shown?
-    // Useful for VR-Applications.
-    //
-    optional bool show_host_avatar = 1;
-
-    //
-    // ToDo: Description
-    //
-    optional Gender gender = 2;
-
-    // The gender of the avatar.
-    //
-    enum Gender
-    {
-        // The gender is unknown.
-        //
-        GENDER_UNKNOWN = 0;
-
-        // It is another gender.
-        //
-        GENDER_OTHER = 1;
-
-        // The gender is female.
-        //
-        GENDER_FEMALE = 2;
-
-        // The gender is male.
-        //
-        GENDER_MALE = 3;
-    }
 }
 
 //

@@ -479,5 +479,5 @@ message SpoutPlane
     //
     // Defines the size of the spout plane in world coordinates.
     //
-    optional Vector3d size = 3;
+    optional Vector3d size = 4;
 }

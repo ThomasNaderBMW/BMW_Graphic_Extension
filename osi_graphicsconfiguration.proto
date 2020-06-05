@@ -471,7 +471,13 @@ message SpoutPlane
     optional Vector3d position = 2;
     
     //
-    // Size of the spout plane in percent.
+    // Defines the direction of the spout plane relative to the target it is attached to
+    // in world coordinates.
     //
-    optional double size = 3;
+    optional Vector3d direction = 3;
+    
+    //
+    // Defines the size of the spout plane in world coordinates.
+    //
+    optional Vector3d size = 3;
 }

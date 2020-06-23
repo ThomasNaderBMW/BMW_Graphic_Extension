@@ -1,0 +1,40 @@
+syntax = "proto2";
+
+option optimize_for = SPEED;
+
+import "osi_common.proto";
+import "osi_version.proto";
+
+package osi3;
+
+//
+// \brief Provides data of a motion platform.
+//
+message MotionPlatform
+{
+    //
+    // The interface version used by the sender (i.e. the simulation environment).
+    //
+    optional InterfaceVersion version = 1;
+
+    //
+    // The data timestamp of the simulation environment.
+    //
+    optional Timestamp timestamp = 2;
+
+    //
+    // Optional offset between the viewer and the platform position BaseMoving.position.
+    //
+    optional Vector3d viewerOffset = 3;
+
+    // The base parameters of the tracked platform.
+    //
+    // BaseMoving.position - Position of the viewer, x, y, z in [m]
+    // BaseMoving.orientation - Viewing direction of the viewer [rad]
+    // BaseMoving.velocity - Speed of the viewer, x, y, z [m/s]
+    // BaseMoving.orientation_rate - Turning rates of the viewer. [rad/s]
+    // BaseMoving.acceleration - Unused.
+    // BaseMoving.dimension - Unused.
+    //
+    optional BaseMoving base = 4;
+}

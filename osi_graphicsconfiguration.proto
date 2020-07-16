@@ -71,6 +71,11 @@ message GraphicsConfiguration
     //
     optional VisualizationTarget visualization_target = 10;
 
+    //
+    // Defines the approximation mode of the vehicles.
+    //
+    optional VehicleApproximationMode vehicle_approximation_mode = 11;
+
     // The mode of the visualization.
     //
     enum VisualizationMode
@@ -116,7 +121,23 @@ message GraphicsConfiguration
         //
         VISUALIZATION_TARGET_PEDESTRIAN = 3;
     }
-    
+
+    // Modes for approximation of the position/rotation of vehicles.
+    //
+    enum VehicleApproximationMode
+    {
+        // Disables approximation.
+        //
+        VEHICLE_APPROXIMATION_MODE_DISABLED = 0;
+
+        // Calculates approximation for all vehicles at once (same target-time).
+        //
+        VEHICLE_APPROXIMATION_MODE_CENTRAL = 1;
+
+        // Calculates approximation for each vehicle separately (different target-times).
+        VEHICLE_APPROXIMATION_MODE_VEHICLE = 2;
+    }
+
     //Open:
     //Kopfposition
     // OSI-Env (Tageszeitentypen, Cloudspeed, Wettertypen, Cloudshadowintensity, Percipitation, TimeofDay) country_code
